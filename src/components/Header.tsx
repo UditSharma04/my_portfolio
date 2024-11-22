@@ -44,7 +44,7 @@ const Header = () => {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-4 right-4 md:left-[19.5rem] left-4 z-40"
+      className="hidden md:block fixed top-4 right-4 md:left-[19.5rem] left-4 z-40"
     >
       <div className="relative">
         {/* Glow Effect */}

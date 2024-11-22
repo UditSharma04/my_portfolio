@@ -161,8 +161,8 @@ const Home = () => {
       {/* Particle Network Background */}
       <ParticleNetwork />
 
-      <div className='relative max-w-[1000px] mx-auto px-8 flex flex-col justify-center h-full pt-32'>
-        <div className="flex flex-col gap-8">
+      <div className='relative max-w-[1000px] mx-auto px-4 sm:px-8 flex flex-col justify-center h-full pt-16 sm:pt-32'>
+        <div className="flex flex-col gap-4 sm:gap-8">
           {/* Name */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -83,14 +83,14 @@ const Projects = () => {
   );
 
   return (
-    <div id='projects' className='w-full min-h-screen bg-background py-24'>
-      <div className='max-w-[1400px] mx-auto px-8'>
+    <div id='projects' className='w-full min-h-screen bg-background py-12 sm:py-24'>
+      <div className='max-w-[1400px] mx-auto px-4 sm:px-8'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-8 sm:mb-16"
         >
           <h2 className='text-4xl font-bold inline border-b-4 border-accent text-textPrimary'>
             Projects
