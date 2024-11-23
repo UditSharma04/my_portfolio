@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+:root {
+  --primary: #0f172a;
+  --secondary: #1e293b;
+  --accent: #7477FF;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+}
 
 body {
   margin: 0;
@@ -11,6 +17,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary);
+  color: var(--text-primary);
 }
 
 code {
@@ -18,29 +26,76 @@ code {
     monospace;
 }
 
-@layer base {
-  body {
-    @apply font-[Raleway] bg-primary text-textPrimary;
-    margin: 0;
-    padding: 0;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Animation utilities */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
   }
-  
-  li {
-    @apply cursor-pointer;
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
   }
 }
 
-.content-div {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 250px;
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
-.content-div:hover {
-  background-image: linear-gradient(
-    to right,
-    rgba(112, 157, 255, 0.8),
-    hsla(242, 74%, 61%, 0.8)   
-  )!important;
+/* Mesh pattern background */
+.bg-mesh-pattern {
+  background-image: radial-gradient(var(--accent) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
+
+/* Glassmorphism */
+.backdrop-blur-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Perspective transforms */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+} 

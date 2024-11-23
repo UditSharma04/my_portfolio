@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLinkedin, FaUser, FaCode, FaProjectDiagram, FaEnvelope, FaGithub } from 'react-icons/fa';
+import { 
+  FaUser, 
+  FaCode, 
+  FaProjectDiagram, 
+  FaEnvelope, 
+  FaHome,
+  FaLinkedin,
+  FaGithub,
+  FaFileAlt
+} from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
-import { BsFillPersonLinesFill } from 'react-icons/bs';
+import SocialLinks from './SocialLinks';
 
 interface Bubble {
   id: number;
@@ -66,6 +75,48 @@ const Navbar = () => {
   };
 
   const handleClick = () => setIsOpen(!isOpen);
+
+  // Add these variants for link animations
+  const linkVariants = {
+    initial: { x: -20, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    exit: { x: 20, opacity: 0 }
+  };
+
+  const navLinks = [
+    { id: 'home', icon: FaHome, label: 'Home' },
+    { id: 'about', icon: FaUser, label: 'About' },
+    { id: 'skills', icon: FaCode, label: 'Skills' },
+    { id: 'projects', icon: FaProjectDiagram, label: 'Projects' },
+    { id: 'contact', icon: FaEnvelope, label: 'Contact' }
+  ];
+
+  const socialLinks = [
+    { 
+      href: 'https://www.linkedin.com/in/hellouditt/',
+      icon: FaLinkedin,
+      label: 'LinkedIn',
+      color: 'text-[#0A66C2]'
+    },
+    { 
+      href: 'https://github.com/UditSharma04',
+      icon: FaGithub,
+      label: 'GitHub',
+      color: 'text-[#171515]'
+    },
+    { 
+      href: 'mailto:uditsharmaswm2004@gmail.com',
+      icon: HiOutlineMail,
+      label: 'Email',
+      color: 'text-[#EA4335]'
+    },
+    { 
+      href: '/resume.pdf',
+      icon: FaFileAlt,
+      label: 'Resume',
+      color: 'text-accent'
+    }
+  ];
 
   return (
     <>
@@ -204,80 +255,37 @@ const Navbar = () => {
           <div className='px-4 py-6'>
             {/* Navigation Links */}
             <nav>
-              <ul className='space-y-2'>
-                <li>
-                  <Link 
-                    to='home' 
-                    smooth={true} 
-                    duration={500} 
-                    onClick={handleClick}
-                    className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
-                    activeClass='bg-white/10 text-accent'
-                    spy={true}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-accent group-hover:scale-110 transition-transform">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    <span className='group-hover:text-accent transition-colors'>Home</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to='about' 
-                    smooth={true} 
-                    duration={500} 
-                    onClick={handleClick}
-                    className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
-                    activeClass='bg-white/10 text-accent'
-                    spy={true}
-                  >
-                    <FaUser size={20} className='text-accent group-hover:scale-110 transition-transform' />
-                    <span className='group-hover:text-accent transition-colors'>About</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to='skills' 
-                    smooth={true} 
-                    duration={500} 
-                    onClick={handleClick}
-                    className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
-                    activeClass='bg-white/10 text-accent'
-                    spy={true}
-                  >
-                    <FaCode size={20} className='text-accent group-hover:scale-110 transition-transform' />
-                    <span className='group-hover:text-accent transition-colors'>Skills</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to='projects' 
-                    smooth={true} 
-                    duration={500} 
-                    onClick={handleClick}
-                    className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
-                    activeClass='bg-white/10 text-accent'
-                    spy={true}
-                  >
-                    <FaProjectDiagram size={20} className='text-accent group-hover:scale-110 transition-transform' />
-                    <span className='group-hover:text-accent transition-colors'>Projects</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to='contact' 
-                    smooth={true} 
-                    duration={500} 
-                    onClick={handleClick}
-                    className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
-                    activeClass='bg-white/10 text-accent'
-                    spy={true}
-                  >
-                    <FaEnvelope size={20} className='text-accent group-hover:scale-110 transition-transform' />
-                    <span className='group-hover:text-accent transition-colors'>Contact</span>
-                  </Link>
-                </li>
-              </ul>
+              <motion.ul 
+                className='space-y-2'
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ staggerChildren: 0.1 }}
+              >
+                {navLinks.map(({ id, icon: Icon, label }) => (
+                  <motion.li key={id} variants={linkVariants}>
+                    <Link 
+                      to={id}
+                      spy={true}
+                      smooth={true} 
+                      duration={500} 
+                      offset={-70}
+                      onClick={handleClick}
+                      className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group cursor-pointer'
+                      activeClass='bg-white/10 text-accent'
+                    >
+                      <Icon className="w-5 h-5 text-accent group-hover:scale-110 transition-transform" />
+                      <motion.span 
+                        className='group-hover:text-accent transition-colors'
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        {label}
+                      </motion.span>
+                    </Link>
+                  </motion.li>
+                ))}
+              </motion.ul>
             </nav>
 
             {/* Divider */}
@@ -285,40 +293,18 @@ const Navbar = () => {
 
             {/* Social Links */}
             <div className='space-y-2'>
-              <a 
-                href='https://www.linkedin.com/in/udit-sharma-8080/' 
-                target='_blank' 
-                rel='noreferrer'
-                className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
-              >
-                <FaLinkedin size={20} className='text-[#0A66C2] group-hover:scale-110 transition-transform' />
-                <span className='group-hover:text-accent transition-colors'>LinkedIn</span>
-              </a>
-              <a 
-                href='https://github.com/UditSharma04' 
-                target='_blank' 
-                rel='noreferrer'
-                className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
-              >
-                <FaGithub size={20} className='text-[#171515] group-hover:scale-110 transition-transform' />
-                <span className='group-hover:text-accent transition-colors'>GitHub</span>
-              </a>
-              <a 
-                href='mailto:uditsharma.work@gmail.com'
-                className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
-              >
-                <HiOutlineMail size={20} className='text-[#EA4335] group-hover:scale-110 transition-transform' />
-                <span className='group-hover:text-accent transition-colors'>Email</span>
-              </a>
-              <a 
-                href='/resume.pdf' 
-                target='_blank' 
-                rel='noreferrer'
-                className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
-              >
-                <BsFillPersonLinesFill size={20} className='text-accent group-hover:scale-110 transition-transform' />
-                <span className='group-hover:text-accent transition-colors'>Resume</span>
-              </a>
+              {socialLinks.map(({ href, icon: Icon, label, color }) => (
+                <a 
+                  key={label}
+                  href={href}
+                  target='_blank' 
+                  rel='noreferrer'
+                  className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
+                >
+                  <Icon size={20} className={`${color} group-hover:scale-110 transition-transform`} />
+                  <span className='group-hover:text-accent transition-colors'>{label}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -327,6 +313,15 @@ const Navbar = () => {
       {/* Main Content Wrapper */}
       <div className='md:ml-72 transition-all duration-300'>
         {/* Your main content goes here */}
+      </div>
+
+      {/* Social Links */}
+      <div className="hidden lg:flex fixed flex-col top-[35%] left-0">
+        <SocialLinks 
+          vertical 
+          iconSize={20} 
+          className="ml-[-100px] hover:ml-0 duration-300"
+        />
       </div>
     </>
   );

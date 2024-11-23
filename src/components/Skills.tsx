@@ -1,56 +1,78 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  FaReact, FaNodeJs, FaPython, FaDocker, FaAws,
-  FaGithub, FaLinux
-} from 'react-icons/fa';
-import {
-  SiTypescript, SiJavascript, SiTailwindcss, SiMongodb,
-  SiPostgresql, SiRedis, SiKubernetes, SiTensorflow,
-  SiPytorch, SiScikitlearn, SiNextdotjs, SiVite,
-  SiVisualstudiocode, SiPostman, SiFigma
+import { 
+  SiPython, SiHtml5, SiCss3, SiJavascript, SiPhp, SiMysql,
+  SiR, SiMarkdown, SiNodedotjs, SiExpress, SiGit, SiGooglecloud,
+  SiMongodb, SiFirebase, SiXampp, SiGooglemaps, SiTailwindcss, SiBootstrap, SiJupyter,
+  SiVisualstudiocode, SiAndroidstudio, SiArduino, SiCisco, SiPostman, SiNpm, SiVercel,
+  SiPowershell, SiOpenai, SiAmazonwebservices, SiCplusplus, SiWindows, SiLinux
 } from 'react-icons/si';
+import { DiJava, DiDatabase } from 'react-icons/di';
+import { FaNetworkWired, FaServer, FaMicrochip, FaCode, FaBook, FaLaptopCode } from 'react-icons/fa';
 
-interface Skill {
+interface SkillItem {
   name: string;
-  icon: JSX.Element;
+  icon: React.ReactElement;
+  proficiency?: number;
+  experience?: string;
+  projects?: number;
 }
 
-const skillCategories = {
-  frontend: [
-    { name: 'React', icon: <FaReact /> },
-    { name: 'TypeScript', icon: <SiTypescript /> },
-    { name: 'JavaScript', icon: <SiJavascript /> },
-    { name: 'TailwindCSS', icon: <SiTailwindcss /> },
+interface SkillCategory {
+  [key: string]: SkillItem[];
+}
+
+const skillCategories: SkillCategory = {
+  "Languages": [
+    { name: "Java", icon: <DiJava /> },
+    { name: "C++", icon: <SiCplusplus /> },
+    { name: "Python", icon: <SiPython /> },
+    { name: "HTML", icon: <SiHtml5 /> },
+    { name: "CSS", icon: <SiCss3 /> },
+    { name: "JavaScript", icon: <SiJavascript /> },
+    { name: "PHP", icon: <SiPhp /> },
+    { name: "SQL", icon: <SiMysql /> },
+    { name: "MATLAB", icon: <FaLaptopCode /> },
+    { name: "R", icon: <SiR /> },
+    { name: "Markdown", icon: <SiMarkdown /> }
   ],
-  frontendTools: [
-    { name: 'Next.js', icon: <SiNextdotjs /> },
-    { name: 'Vite', icon: <SiVite /> },
-    { name: 'VS Code', icon: <SiVisualstudiocode /> },
-    { name: 'Figma', icon: <SiFigma /> },
+  "Developer Tools": [
+    { name: "NodeJs", icon: <SiNodedotjs /> },
+    { name: "ExpressJs", icon: <SiExpress /> },
+    { name: "Git", icon: <SiGit /> },
+    { name: "Google Cloud", icon: <SiGooglecloud /> },
+    { name: "AWS", icon: <SiAmazonwebservices /> },
+    { name: "MongoDB", icon: <SiMongodb /> },
+    { name: "Firebase", icon: <SiFirebase /> },
+    { name: "MySQL", icon: <SiMysql /> },
+    { name: "XAMPP", icon: <SiXampp /> },
+    { name: "Google Maps", icon: <SiGooglemaps /> },
+    { name: "Tailwind", icon: <SiTailwindcss /> },
+    { name: "Bootstrap", icon: <SiBootstrap /> }
   ],
-  backend: [
-    { name: 'Node.js', icon: <FaNodeJs /> },
-    { name: 'Python', icon: <FaPython /> },
-    { name: 'Docker', icon: <FaDocker /> },
-    { name: 'Linux', icon: <FaLinux /> },
+  "Tools & Libraries": [
+    { name: "Jupyter", icon: <SiJupyter /> },
+    { name: "VS Code", icon: <SiVisualstudiocode /> },
+    { name: "Android Studio", icon: <SiAndroidstudio /> },
+    { name: "Arduino", icon: <SiArduino /> },
+    { name: "Cisco Packet Tracer", icon: <SiCisco /> },
+    { name: "Postman", icon: <SiPostman /> },
+    { name: "NPM", icon: <SiNpm /> },
+    { name: "Vercel", icon: <SiVercel /> },
+    { name: "PowerShell", icon: <SiPowershell /> },
+    { name: "Windows", icon: <SiWindows /> },
+    { name: "Linux", icon: <SiLinux /> }
   ],
-  databases: [
-    { name: 'MongoDB', icon: <SiMongodb /> },
-    { name: 'PostgreSQL', icon: <SiPostgresql /> },
-    { name: 'Redis', icon: <SiRedis /> },
-  ],
-  devops: [
-    { name: 'AWS', icon: <FaAws /> },
-    { name: 'Kubernetes', icon: <SiKubernetes /> },
-    { name: 'GitHub', icon: <FaGithub /> },
-    { name: 'Postman', icon: <SiPostman /> },
-  ],
-  aiml: [
-    { name: 'TensorFlow', icon: <SiTensorflow /> },
-    { name: 'PyTorch', icon: <SiPytorch /> },
-    { name: 'Scikit-learn', icon: <SiScikitlearn /> },
-  ],
+  "Relevant Coursework": [
+    { name: "Computer Networks", icon: <FaNetworkWired /> },
+    { name: "Operating Systems", icon: <FaServer /> },
+    { name: "Microprocessors", icon: <FaMicrochip /> },
+    { name: "Data Structures", icon: <FaCode /> },
+    { name: "Web Development", icon: <SiHtml5 /> },
+    { name: "Database Management", icon: <DiDatabase /> },
+    { name: "Compiler Design", icon: <FaBook /> },
+    { name: "Generative AI", icon: <SiOpenai /> }
+  ]
 };
 
 const Skills = () => {

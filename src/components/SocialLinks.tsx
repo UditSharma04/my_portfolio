@@ -1,53 +1,115 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BsGithub, BsLinkedin, BsEnvelope } from 'react-icons/bs';
+import { FaLinkedin, FaGithub, FaTwitter, FaInstagram, FaEnvelope } from 'react-icons/fa';
+
+interface SocialLink {
+  name: string;
+  icon: React.ElementType;
+  href: string;
+  color: string;
+}
+
+export const socialLinks: SocialLink[] = [
+  {
+    name: 'LinkedIn',
+    icon: FaLinkedin,
+    href: 'https://www.linkedin.com/in/hellouditt/',
+    color: 'hover:text-[#0A66C2]'
+  },
+  {
+    name: 'GitHub',
+    icon: FaGithub,
+    href: 'https://github.com/UditSharma04',
+    color: 'hover:text-[#333]'
+  },
+  {
+    name: 'Twitter',
+    icon: FaTwitter,
+    href: 'https://x.com/hellouditt',
+    color: 'hover:text-[#1DA1F2]'
+  },
+  {
+    name: 'Instagram',
+    icon: FaInstagram,
+    href: 'https://www.instagram.com/confused.udit/',
+    color: 'hover:text-[#E4405F]'
+  },
+  {
+    name: 'Email',
+    icon: FaEnvelope,
+    href: 'mailto:uditsharmaswm2004@gmail.com',
+    color: 'hover:text-[#EA4335]'
+  }
+];
 
 interface SocialLinksProps {
   className?: string;
   iconSize?: number;
   showLabels?: boolean;
+  vertical?: boolean;
+  animate?: boolean;
 }
 
-const socialLinks = [
-  {
-    name: 'GitHub',
-    icon: BsGithub,
-    url: 'https://github.com/UditSharma04',
+// Add hover effect variants
+const hoverVariants = {
+  hover: {
+    scale: 1.1,
+    transition: { type: "spring", stiffness: 400 }
   },
-  {
-    name: 'LinkedIn',
-    icon: BsLinkedin,
-    url: 'https://www.linkedin.com/in/udit-sharma-8080/',
-  },
-  {
-    name: 'Email',
-    icon: BsEnvelope,
-    url: 'mailto:uditsharma.work@gmail.com',
-  },
-];
+  tap: {
+    scale: 0.95
+  }
+};
 
-const SocialLinks: React.FC<SocialLinksProps> = ({ 
-  className = '', 
+// Add stagger animation for links
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const SocialLinks: React.FC<SocialLinksProps> = ({
+  className = '',
   iconSize = 20,
-  showLabels = false 
+  showLabels = false,
+  vertical = false,
+  animate = true
 }) => {
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <motion.div 
+      className={`flex ${vertical ? 'flex-col' : 'flex-row'} gap-4 ${className}`}
+      variants={animate ? containerVariants : undefined}
+      initial="hidden"
+      animate="visible"
+    >
       {socialLinks.map((link) => (
         <motion.a
           key={link.name}
-          href={link.url}
+          href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-textSecondary hover:text-accent transition-colors"
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          className={`flex items-center gap-2 text-textSecondary transition-colors ${link.color}`}
+          variants={hoverVariants}
+          whileHover="hover"
+          whileTap="tap"
         >
           <link.icon size={iconSize} />
-          {showLabels && <span>{link.name}</span>}
+          {showLabels && (
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {link.name}
+            </motion.span>
+          )}
         </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

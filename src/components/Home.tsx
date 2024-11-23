@@ -146,8 +146,15 @@ const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: React.Ele
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const socialLinks = [
+    { href: "https://github.com/UditSharma04", icon: FaGithub, label: "GitHub" },
+    { href: "https://www.linkedin.com/in/hellouditt/", icon: FaLinkedinIn, label: "LinkedIn" },
+    { href: "https://x.com/hellouditt", icon: FaTwitter, label: "Twitter" },
+    { href: "https://www.instagram.com/confused.udit/", icon: FaInstagram, label: "Instagram" }
+  ];
+
   return (
-    <div className='w-full h-screen bg-primary relative overflow-hidden'>
+    <div id="home" className='w-full h-screen bg-primary relative overflow-hidden'>
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-mesh-pattern opacity-5" />
       
@@ -238,46 +245,14 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
           >
-            <motion.a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textSecondary hover:text-accent transition-colors duration-300"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaGithub size={24} />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textSecondary hover:text-accent transition-colors duration-300"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaLinkedinIn size={24} />
-            </motion.a>
-            <motion.a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textSecondary hover:text-accent transition-colors duration-300"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaTwitter size={24} />
-            </motion.a>
-            <motion.a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-textSecondary hover:text-accent transition-colors duration-300"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaInstagram size={24} />
-            </motion.a>
+            {socialLinks.map((link) => (
+              <SocialLink 
+                key={link.label}
+                href={link.href}
+                icon={link.icon}
+                label={link.label}
+              />
+            ))}
           </motion.div>
         </div>
 

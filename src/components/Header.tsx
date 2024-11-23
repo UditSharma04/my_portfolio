@@ -3,6 +3,7 @@ import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { BsGithub, BsLinkedin, BsEnvelope } from 'react-icons/bs';
 import { IoLocationOutline, IoBriefcaseOutline, IoClose } from 'react-icons/io5';
 import profilePic from '../assets/mai.jpg';
+import SocialLinks from './SocialLinks';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -121,7 +122,7 @@ const Header = () => {
                     className="flex items-center gap-4"
                   >
                     <motion.a
-                      href="https://github.com/Udit-8"
+                      href="https://github.com/UditSharma04"
                       target="_blank"
                       rel="noreferrer"
                       className="text-textSecondary hover:text-accent transition-colors duration-300"
@@ -131,7 +132,7 @@ const Header = () => {
                       <BsGithub className="text-xl" />
                     </motion.a>
                     <motion.a
-                      href="https://www.linkedin.com/in/udit-sharma-8080/"
+                      href="https://www.linkedin.com/in/hellouditt/"
                       target="_blank"
                       rel="noreferrer"
                       className="text-textSecondary hover:text-accent transition-colors duration-300"
@@ -141,7 +142,7 @@ const Header = () => {
                       <BsLinkedin className="text-xl" />
                     </motion.a>
                     <motion.a
-                      href="mailto:uditsharma.work@gmail.com"
+                      href="mailto:work.udit04@gmail.com"
                       className="text-textSecondary hover:text-accent transition-colors duration-300"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -197,7 +198,7 @@ const Header = () => {
                     <p className="text-textSecondary">Internships</p>
                   </div>
                 </div>
-              </div>
+              </div> 
             </motion.div>
           </motion.div>
         )}
