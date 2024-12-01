@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@heroicons/react": "^2.2.0",
+    "@types/lodash": "^4.17.13",
     "@types/react-type-animation": "^1.1.4",
     "autoprefixer": "^10.4.20",
     "framer-motion": "^11.11.17",

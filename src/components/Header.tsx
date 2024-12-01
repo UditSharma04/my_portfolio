@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { BsGithub, BsLinkedin, BsEnvelope } from 'react-icons/bs';
 import { IoLocationOutline, IoBriefcaseOutline, IoClose } from 'react-icons/io5';
@@ -9,21 +9,27 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  const controls = useAnimation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 100);
+  const handleScroll = useCallback(() => {
+    let timeoutId: NodeJS.Timeout;
+    
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      
+      timeoutId = setTimeout(() => {
+        const scrollPosition = window.scrollY;
+        setIsScrolled(scrollPosition > 50);
+      }, 100);
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    controls.start(isScrolled ? 'scrolled' : 'initial');
-  }, [isScrolled, controls]);
+    const scrollHandler = handleScroll();
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [handleScroll]);
 
   const socialLinksVariants = {
     initial: { 
@@ -60,17 +66,33 @@ const Header = () => {
             <div className="flex items-center gap-6">
               {/* Profile Picture */}
               <motion.div 
-                className="relative group"
+                className="relative group animate-float"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
                 onClick={() => setIsImageModalOpen(true)}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative w-20 h-20 rounded-full border-2 border-accent/50 group-hover:border-accent overflow-hidden transition-colors duration-300">
+                <div className="relative w-20 h-20 rounded-full overflow-hidden">
+                  {/* Animated border container */}
+                  <div className="absolute inset-0 rounded-full">
+                    <div className="absolute inset-0 animate-border-spin">
+                      <div className="w-full h-full rounded-full border-2 border-transparent 
+                                    [background:linear-gradient(white,white)padding-box,linear-gradient(to_right,#7477FF,#8F91FF)border-box]" />
+                    </div>
+                  </div>
                   <img 
                     src={profilePic}
                     alt="Udit Sharma" 
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      imageRendering: 'crisp-edges',
+                      WebkitBackfaceVisibility: 'hidden',
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)',
+                      willChange: 'transform'
+                    }}
+                    loading="eager"
+                    draggable="false"
                   />
                 </div>
               </motion.div>

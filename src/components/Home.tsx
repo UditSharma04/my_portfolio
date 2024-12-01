@@ -6,9 +6,7 @@ import { FaGithub, FaLinkedinIn, FaTwitter, FaInstagram, FaTimes, FaMapMarkerAlt
 const roles = [
   { text: "Full Stack Developer", color: "text-accent" },
   { text: "UI/UX Designer", color: "text-purple-500" },
-  { text: "Self Learner", color: "text-green-500" },
-  { text: "Problem Solver", color: "text-blue-500" },
-  { text: "Gamer", color: "text-red-500" }
+  { text: "Problem Solver", color: "text-blue-500" }
 ];
 
 const TypewriterText = () => {
@@ -168,8 +166,8 @@ const Home = () => {
       {/* Particle Network Background */}
       <ParticleNetwork />
 
-      <div className='relative max-w-[1000px] mx-auto px-4 sm:px-8 flex flex-col justify-center h-full pt-16 sm:pt-32'>
-        <div className="flex flex-col gap-4 sm:gap-8">
+      <div className='relative max-w-[1000px] mx-auto px-4 sm:px-8 flex flex-col justify-center h-full pt-4 sm:pt-16'>
+        <div className="flex flex-col gap-2 sm:gap-8">
           {/* Name */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,7 +209,7 @@ const Home = () => {
             className="text-xl md:text-2xl text-textSecondary flex items-center gap-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
           >
             <motion.span
@@ -258,7 +256,7 @@ const Home = () => {
 
         {/* Scroll Indicator */}
         <motion.div
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 hidden md:block"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}

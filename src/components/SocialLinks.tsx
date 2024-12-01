@@ -72,6 +72,21 @@ const containerVariants = {
   }
 };
 
+class SocialLinksErrorBoundary extends React.Component<{ children: React.ReactNode }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div className="text-textSecondary">Failed to load social links</div>;
+    }
+    return this.props.children;
+  }
+}
+
 const SocialLinks: React.FC<SocialLinksProps> = ({
   className = '',
   iconSize = 20,
@@ -80,36 +95,38 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
   animate = true
 }) => {
   return (
-    <motion.div 
-      className={`flex ${vertical ? 'flex-col' : 'flex-row'} gap-4 ${className}`}
-      variants={animate ? containerVariants : undefined}
-      initial="hidden"
-      animate="visible"
-    >
-      {socialLinks.map((link) => (
-        <motion.a
-          key={link.name}
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`flex items-center gap-2 text-textSecondary transition-colors ${link.color}`}
-          variants={hoverVariants}
-          whileHover="hover"
-          whileTap="tap"
-        >
-          <link.icon size={iconSize} />
-          {showLabels && (
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              {link.name}
-            </motion.span>
-          )}
-        </motion.a>
-      ))}
-    </motion.div>
+    <SocialLinksErrorBoundary>
+      <motion.div 
+        className={`flex ${vertical ? 'flex-col' : 'flex-row'} gap-4 ${className}`}
+        variants={animate ? containerVariants : undefined}
+        initial="hidden"
+        animate="visible"
+      >
+        {socialLinks.map((link) => (
+          <motion.a
+            key={link.name}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-2 text-textSecondary transition-colors ${link.color}`}
+            variants={hoverVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
+            <link.icon size={iconSize} />
+            {showLabels && (
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                {link.name}
+              </motion.span>
+            )}
+          </motion.a>
+        ))}
+      </motion.div>
+    </SocialLinksErrorBoundary>
   );
 };
 
