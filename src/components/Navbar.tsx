@@ -299,7 +299,8 @@ const Navbar = () => {
                   href={href}
                   target='_blank' 
                   rel='noreferrer'
-                  className='flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg transition-all group'
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all group
+                    ${label === 'Resume' ? 'resume-btn-highlight hover:bg-accent/20' : 'hover:bg-white/10'}`}
                 >
                   <Icon size={20} className={`${color} group-hover:scale-110 transition-transform`} />
                   <span className='group-hover:text-accent transition-colors'>{label}</span>
